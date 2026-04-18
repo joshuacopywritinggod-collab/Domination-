@@ -7,131 +7,106 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #050505; --dark-grey: #121212; --white: #e0e0e0; --red: #ff4d4d; }
-        
         * { box-sizing: border-box; }
         body { font-family: 'Playfair Display', serif; background-color: var(--black); color: var(--white); margin: 0; padding: 0; line-height: 1.8; }
         
-        /* Progress Bar */
         #progress-container { position: fixed; top: 0; width: 100%; height: 4px; background: #222; z-index: 2000; }
         #progress-bar { height: 100%; background: var(--gold); width: 0%; transition: width 0.1s; }
-
-        #timer-box { background: var(--red); color: white; text-align: center; padding: 12px; font-family: 'Inter', sans-serif; font-weight: bold; position: sticky; top: 4px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.7); }
+        #timer-box { background: var(--red); color: white; text-align: center; padding: 12px; font-family: 'Inter', sans-serif; font-weight: bold; position: sticky; top: 4px; z-index: 1000; }
         
         .container { padding: 60px 24px; max-width: 700px; margin: auto; }
-        
-        h1 { font-size: 2.8rem; color: #fff; text-align: center; font-family: 'Inter', sans-serif; font-weight: 900; line-height: 1.1; margin: 40px 0; letter-spacing: -1px; }
-        .author-tag { text-align: center; font-style: italic; color: var(--gold); margin-bottom: 40px; font-size: 1.1rem; }
-        
+        h1 { font-size: 2.8rem; color: #fff; text-align: center; font-family: 'Inter', sans-serif; font-weight: 900; line-height: 1.1; margin: 40px 0; }
+        .author-tag { text-align: center; font-style: italic; color: var(--gold); margin-bottom: 40px; }
         .dropcap { float: left; font-size: 5rem; line-height: 0.8; font-weight: 900; margin-right: 12px; color: var(--gold); font-family: 'Inter', sans-serif; }
         
-        p { margin-bottom: 25px; font-size: 1.2rem; color: #ccc; }
+        .pull-quote { font-size: 1.8rem; color: var(--gold); font-style: italic; border-left: 4px solid var(--gold); padding: 10px 0 10px 30px; margin: 50px 0; background: linear-gradient(90deg, #1a1a10 0%, transparent 100%); }
 
-        .pull-quote { font-size: 1.8rem; color: var(--gold); font-style: italic; border-left: 4px solid var(--gold); padding: 10px 0 10px 30px; margin: 50px 0; line-height: 1.4; background: linear-gradient(90deg, #1a1a10 0%, transparent 100%); }
+        /* Testimony Blocks */
+        .testimonial-inline { background: #0f0f0f; padding: 30px; border-radius: 15px; border: 1px solid #222; margin: 40px 0; font-style: italic; }
+        .testimonial-inline strong { color: var(--gold); display: block; margin-top: 15px; font-family: 'Inter', sans-serif; text-transform: uppercase; font-size: 0.8rem; }
 
-        /* Testimonials */
-        .testimonial-inline { background: #0f0f0f; padding: 30px; border-radius: 15px; border: 1px solid #222; margin: 40px 0; position: relative; }
-        .testimonial-inline::before { content: '"'; position: absolute; top: -20px; left: 20px; font-size: 5rem; color: #222; font-family: serif; }
-        .testimonial-inline strong { color: var(--gold); display: block; margin-top: 15px; font-family: 'Inter', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        /* Unified Accordion System (System & FAQ) */
+        .dropdown-box { background: #111; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; }
+        .header-trigger { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-weight: 900; color: var(--gold); }
+        .content-area { padding: 0 25px; max-height: 0; overflow: hidden; transition: all 0.4s ease; font-size: 1.1rem; color: #aaa; }
+        .active-box { border-color: var(--gold); background: #1a1a10; }
+        .active-box .content-area { max-height: 600px; padding-bottom: 30px; }
+        .icon { transition: transform 0.3s; }
+        .active-box .icon { transform: rotate(45deg); color: var(--red); }
 
-        /* Accordion System */
-        .system-dropdown { background: #111; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; transition: all 0.3s ease; }
-        .dropdown-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-weight: 900; color: var(--gold); letter-spacing: 1px; }
-        .dropdown-content { padding: 0 25px; max-height: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); font-size: 1.1rem; color: #aaa; font-family: 'Playfair Display', serif; }
-        .dropdown-active { border-color: var(--gold); background: #1a1a10; }
-        .dropdown-active .dropdown-content { max-height: 600px; padding-bottom: 30px; }
-        .icon { transition: transform 0.3s; font-size: 1.5rem; }
-        .dropdown-active .icon { transform: rotate(45deg); color: var(--red); }
-
-        /* 3D "Impossible to Ignore" Button */
+        /* 3D Button */
         .cta-container { text-align: center; margin: 80px 0; }
-        .pushable {
-            position: relative;
-            background: #856a1d;
-            border-radius: 15px;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            outline-offset: 4px;
-            transition: filter 250ms;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .front {
-            display: block;
-            position: relative;
-            padding: 22px 50px;
-            border-radius: 15px;
-            font-size: 1.4rem;
-            color: black;
-            background: var(--gold);
-            will-change: transform;
-            transform: translateY(-8px);
-            transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-        }
-        .pushable:hover .front { transform: translateY(-10px); transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5); }
-        .pushable:active .front { transform: translateY(-4px); transition: transform 34ms; }
+        .pushable { background: #856a1d; border-radius: 15px; border: none; padding: 0; cursor: pointer; text-decoration: none; display: inline-block; }
+        .front { display: block; padding: 22px 50px; border-radius: 15px; font-size: 1.4rem; color: black; background: var(--gold); transform: translateY(-8px); transition: transform 600ms cubic-bezier(.3, .7, .4, 1); font-family: 'Inter', sans-serif; font-weight: 900; }
+        .pushable:hover .front { transform: translateY(-10px); }
+        .pushable:active .front { transform: translateY(-4px); }
 
         .price-section { text-align: center; margin: 60px 0; font-family: 'Inter', sans-serif; }
         .old-price { text-decoration: line-through; color: #555; font-size: 1.5rem; }
-        .new-price { font-size: 4.5rem; color: var(--gold); font-weight: 900; display: block; line-height: 1; margin: 10px 0; }
+        .new-price { font-size: 4.5rem; color: var(--gold); font-weight: 900; display: block; line-height: 1; }
 
         footer { text-align: center; padding: 80px 20px; color: #444; font-family: 'Inter', sans-serif; font-size: 0.8rem; border-top: 1px solid #222; }
         
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .new-price { font-size: 3.5rem; }
-            .front { padding: 18px 30px; font-size: 1.1rem; }
-        }
+        @media (max-width: 600px) { h1 { font-size: 2.2rem; } .new-price { font-size: 3.5rem; } }
     </style>
 </head>
 <body>
 
 <div id="progress-container"><div id="progress-bar"></div></div>
-<div id="timer-box">⚡ THE EDEN DISCOUNT (₦15,000) EXPIRES IN: <span id="timer">48:00:00</span></div>
+<div id="timer-box">⚡ DISCOVER YOUR EDEN. ₦15,000 EXPIRES IN: <span id="timer">48:00:00</span></div>
 
 <div class="container">
-    <span style="display:block; text-align:center; color:var(--gold); letter-spacing:5px; font-family:'Inter', sans-serif; font-size:0.7rem; font-weight:bold;">THE ARCHITECTURE OF DOMINATION</span>
-    
     <h1>I was staring at a Red Sea of my own making.</h1>
-    <div class="author-tag">A Letter from Joshua Charles E.</div>
+    <div class="author-tag">A Personal Note from Joshua Charles E.</div>
 
-    <p><span class="dropcap">N</span>ot long ago, I was exactly where you are. I had the knowledge, I had the drive, and I had the dreams. But my reality was a stubborn wall of "almost." I was working harder than anyone I knew, yet I was living in a digital desert—published books that stayed silent and business ideas that felt like heavy chains.</p>
+    <p><span class="dropcap">N</span>ot long ago, I was exactly where you are. I had the knowledge and the drive, but my reality was a stubborn wall of "almost." I realized I was suffering from <strong>The Moses Problem</strong>—waiting for a miracle while the staff of Domination was already in my hand.</p>
     
-    <p>I realized I was suffering from <strong>The Moses Problem</strong>. I was waiting for a miracle while holding the staff in my own hand. I was waiting for someone else to give me "permission" to be great.</p>
-    
-    <div class="pull-quote">"What you need is not to know more. It is a Factory Reset. You need to unlearn the illusion of scarcity."</div>
+    <div class="pull-quote">"Your doubt isn't a feeling. It is a software error."</div>
 
-    <p>When I finally performed the reset, everything shifted. I stopped being the <strong>"Knight"</strong> begging for sales and became the <strong>"Director"</strong> commanding value. I found my way back to <strong>Eden</strong>—a place where abundance is not a struggle, but a biological certainty.</p>
+    <p>When I performed the <strong>Factory Reset</strong>, I stopped being the "Knight" and became the "Director." I found my way back to Eden, where abundance is a biological certainty.</p>
 
     <div class="testimonial-inline">
-        "Joshua’s words hit me like a physical blow. I was an 'Owner-Slave'—if I didn't work for a day, my income died. This system taught me to build the machine, not be the machine."
+        "I was the 'Owner-Slave' to a business that exhausted me. After Part 3, I realized I was managing a body without an idea. Today, I am the Pilot."
         <strong>— Sarah A., Digital Entrepreneur</strong>
     </div>
 
-    <h2 style="text-align:center; font-family:'Inter',sans-serif; margin-top:60px;">THE 3-PART RADAR TO EDEN</h2>
-    <p style="text-align:center; color:#888;">Tap each phase to see if you are currently stuck there.</p>
+    <h2 style="text-align:center; font-family:'Inter',sans-serif; margin-top:60px;">THE 3-PART RADAR</h2>
 
-    <div class="system-dropdown" onclick="this.classList.toggle('dropdown-active')">
-        <div class="dropdown-header">PART 1: DISPEL THE MYTH <span class="icon">+</span></div>
-        <div class="dropdown-content">
-            <p><strong>Are you waiting for "The Right Time"?</strong> You think you need more capital, more followers, or another degree. This is the first illusion. In Part 1, we kill the <strong>Moses Problem</strong> and deploy <strong>The 7 Motion</strong>. You will realize that everything you need to finish the project is already in your hand.</p>
-        </div>
+    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
+        <div class="header-trigger">PART 1: DISPEL THE MYTH <span class="icon">+</span></div>
+        <div class="content-area"><p>We kill the lie that you "need money to make money." Using <strong>The 7 Motion</strong>, we get you in pursuit of your Eden immediately with what you have now.</p></div>
     </div>
 
-    <div class="system-dropdown" onclick="this.classList.toggle('dropdown-active')">
-        <div class="dropdown-header">PART 2: SHATTER THE ILLUSION <span class="icon">+</span></div>
-        <div class="dropdown-content">
-            <p><strong>Are you the "Invisible Genius"?</strong> This is the <strong>Factory Reset</strong>. We purge the "Learned Helplessness" that keeps your Selar books at zero sales. You will master the <strong>Sensory Trigger</strong> logic—the psychology that makes your value so obvious that the market feels stupid for not buying.</p>
-        </div>
+    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
+        <div class="header-trigger">PART 2: SHATTER THE ILLUSION <span class="icon">+</span></div>
+        <div class="content-area"><p>The <strong>Factory Reset</strong>. We purge the learned helplessness and install <strong>Sensory Triggers</strong> to make your perceived value undeniable to the market.</p></div>
     </div>
 
-    <div class="system-dropdown" onclick="this.classList.toggle('dropdown-active')">
-        <div class="dropdown-header">PART 3: THE RETURN TO EDEN <span class="icon">+</span></div>
-        <div class="dropdown-content">
-            <p><strong>Are you an "Owner-Slave"?</strong> The final bridge. We install the <strong>EQSP Wealth System</strong>. This moves you from the engine room to the captain’s deck. You build a machine that functions on your <strong>vivo y1</strong> while you sleep, finally living in the abundance you were designed for.</p>
-        </div>
+    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
+        <div class="header-trigger">PART 3: THE RETURN TO EDEN <span class="icon">+</span></div>
+        <div class="content-area"><p>Building the <strong>EQSP Wealth System</strong>. We move you from labor to leverage, building a machine that grows while you sleep.</p></div>
+    </div>
+
+    <div class="testimonial-inline">
+        "Part 2 alone shifted my sales in a way 6 months of 'hard work' couldn't. I am finally in motion."
+        <strong>— Tunde O., Author</strong>
+    </div>
+
+    <h2 style="text-align:center; font-family:'Inter',sans-serif; margin-top:80px; color:var(--gold);">FREQUENTLY ASKED QUESTIONS</h2>
+
+    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
+        <div class="header-trigger">Is this a physical hardcopy book? <span class="icon">+</span></div>
+        <div class="content-area"><p>No. This is a digital **Surgical System**. Dominators need speed. You get instant access to the framework so you can start your reset on your device immediately.</p></div>
+    </div>
+
+    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
+        <div class="header-trigger">How is this different from "Self-Help"? <span class="icon">+</span></div>
+        <div class="content-area"><p>Most books give you "inspiration." I give you a **Radar**. We don't just talk; we deploy EQSP and Sensory logic to dismantle your limitations mechanically.</p></div>
+    </div>
+
+    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
+        <div class="header-trigger">Does this work for beginners? <span class="icon">+</span></div>
+        <div class="content-area"><p>Yes. Part 1 is specifically designed for those starting with "nothing." We kill the capital myth and show you how to move from exactly where you are.</p></div>
     </div>
 
     <div class="price-section">
@@ -141,24 +116,16 @@
     </div>
 
     <div class="cta-container">
-        <a href="https://wa.link/nrafvh" class="pushable">
-            <span class="front">I'M READY FOR THE RESET</span>
-        </a>
+        <a href="https://wa.link/nrafvh" class="pushable"><span class="front">I'M READY FOR THE RESET</span></a>
     </div>
 
-    <div style="text-align:center; padding: 50px 30px; background:#0a0a0a; border-radius:20px; border: 1px solid #1a1a1a; margin-top:80px;">
-        <h3 style="color:var(--gold); font-family:'Inter', sans-serif;">"You have brains in your head. You have feet in your shoes."</h3>
-        <p style="font-style:italic;">The direction you choose now will determine the next 10 years of your life. I am Joshua Charles E., and I am handing you the radar. Choose Domination.</p>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 JOSHUA CHARLES E. | SHATTERING THE ILLUSION OF LIMITATIONS</p>
-        <p>Your journey back to Eden begins with a single click.</p>
+    <footer style="background:#0a0a0a;">
+        <p>"You can steer yourself any direction you choose."</p>
+        <p>&copy; 2026 JOSHUA CHARLES E. | SHATTERING LIMITATIONS</p>
     </footer>
 </div>
 
 <script>
-    // Timer
     let time = 48 * 60 * 60; 
     const timerEl = document.getElementById('timer');
     setInterval(() => {
@@ -169,14 +136,11 @@
         if (time > 0) time--;
     }, 1000);
 
-    // Progress Bar
     window.onscroll = function() {
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        let scrolled = (winScroll / height) * 100;
-        document.getElementById("progress-bar").style.width = scrolled + "%";
+        document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
     };
 </script>
-
 </body>
-</html>
+    </html>
