@@ -3,136 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Return to Eden | Joshua Charles E.</title>
+    <title>THE RESET | Joshua Charles E.</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #050505; --dark-grey: #121212; --white: #e0e0e0; --red: #ff4d4d; }
+        :root { --gold: #D4AF37; --black: #050505; --dark-grey: #111111; --white: #ffffff; --red: #ff3333; }
         * { box-sizing: border-box; }
-        body { font-family: 'Playfair Display', serif; background-color: var(--black); color: var(--white); margin: 0; padding: 0; line-height: 1.8; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--white); margin: 0; padding: 0; line-height: 1.6; overflow-x: hidden; }
         
-        #progress-container { position: fixed; top: 0; width: 100%; height: 4px; background: #222; z-index: 2000; }
-        #progress-bar { height: 100%; background: var(--gold); width: 0%; transition: width 0.1s; }
-        #timer-box { background: var(--red); color: white; text-align: center; padding: 12px; font-family: 'Inter', sans-serif; font-weight: bold; position: sticky; top: 4px; z-index: 1000; }
+        #progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--gold); width: 0%; z-index: 2000; box-shadow: 0 0 10px var(--gold); }
+        #timer-box { background: var(--red); color: white; text-align: center; padding: 15px; font-weight: 900; position: sticky; top: 0; z-index: 1000; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid rgba(0,0,0,0.3); }
         
-        .container { padding: 60px 24px; max-width: 700px; margin: auto; }
-        h1 { font-size: 2.8rem; color: #fff; text-align: center; font-family: 'Inter', sans-serif; font-weight: 900; line-height: 1.1; margin: 40px 0; }
-        .author-tag { text-align: center; font-style: italic; color: var(--gold); margin-bottom: 40px; }
-        .dropcap { float: left; font-size: 5rem; line-height: 0.8; font-weight: 900; margin-right: 12px; color: var(--gold); font-family: 'Inter', sans-serif; }
+        .container { padding: 80px 20px; max-width: 650px; margin: auto; }
         
-        .pull-quote { font-size: 1.8rem; color: var(--gold); font-style: italic; border-left: 4px solid var(--gold); padding: 10px 0 10px 30px; margin: 50px 0; background: linear-gradient(90deg, #1a1a10 0%, transparent 100%); }
-
-        /* Testimony Blocks */
-        .testimonial-inline { background: #0f0f0f; padding: 30px; border-radius: 15px; border: 1px solid #222; margin: 40px 0; font-style: italic; }
-        .testimonial-inline strong { color: var(--gold); display: block; margin-top: 15px; font-family: 'Inter', sans-serif; text-transform: uppercase; font-size: 0.8rem; }
-
-        /* Unified Accordion System (System & FAQ) */
-        .dropdown-box { background: #111; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; }
-        .header-trigger { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-weight: 900; color: var(--gold); }
-        .content-area { padding: 0 25px; max-height: 0; overflow: hidden; transition: all 0.4s ease; font-size: 1.1rem; color: #aaa; }
-        .active-box { border-color: var(--gold); background: #1a1a10; }
-        .active-box .content-area { max-height: 600px; padding-bottom: 30px; }
-        .icon { transition: transform 0.3s; }
-        .active-box .icon { transform: rotate(45deg); color: var(--red); }
-
-        /* 3D Button */
-        .cta-container { text-align: center; margin: 80px 0; }
-        .pushable { background: #856a1d; border-radius: 15px; border: none; padding: 0; cursor: pointer; text-decoration: none; display: inline-block; }
-        .front { display: block; padding: 22px 50px; border-radius: 15px; font-size: 1.4rem; color: black; background: var(--gold); transform: translateY(-8px); transition: transform 600ms cubic-bezier(.3, .7, .4, 1); font-family: 'Inter', sans-serif; font-weight: 900; }
-        .pushable:hover .front { transform: translateY(-10px); }
-        .pushable:active .front { transform: translateY(-4px); }
-
-        .price-section { text-align: center; margin: 60px 0; font-family: 'Inter', sans-serif; }
-        .old-price { text-decoration: line-through; color: #555; font-size: 1.5rem; }
-        .new-price { font-size: 4.5rem; color: var(--gold); font-weight: 900; display: block; line-height: 1; }
-
-        footer { text-align: center; padding: 80px 20px; color: #444; font-family: 'Inter', sans-serif; font-size: 0.8rem; border-top: 1px solid #222; }
+        h1 { font-size: 3.5rem; color: #fff; text-align: center; font-weight: 900; line-height: 0.9; margin: 20px 0; text-transform: uppercase; }
+        .sub-header { text-align: center; color: var(--gold); letter-spacing: 5px; font-size: 0.8rem; font-weight: bold; display: block; }
         
-        @media (max-width: 600px) { h1 { font-size: 2.2rem; } .new-price { font-size: 3.5rem; } }
+        .dropcap { float: left; font-size: 6rem; line-height: 0.7; font-weight: 900; margin-right: 15px; color: var(--gold); }
+        
+        p { margin-bottom: 30px; font-size: 1.25rem; color: #bbb; font-family: 'Inter', sans-serif; }
+        strong { color: #fff; }
+
+        .pull-quote { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); font-style: italic; border-left: 8px solid var(--gold); padding: 20px 0 20px 30px; margin: 60px 0; line-height: 1.2; background: #0a0a0a; }
+
+        /* Story Block */
+        .story-section { border-left: 2px solid #222; padding-left: 20px; margin: 50px 0; }
+
+        /* Testimonial Card */
+        .testimony { background: var(--dark-grey); padding: 40px; border-radius: 4px; border: 1px solid #222; margin: 40px 0; position: relative; }
+        .testimony p { font-style: italic; color: #fff; font-size: 1.4rem; line-height: 1.4; margin-bottom: 10px; }
+        .testimony span { color: var(--gold); font-weight: 900; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; }
+
+        /* Heavy Accordion */
+        .box { background: #080808; border: 1px solid #1a1a1a; margin-bottom: 15px; transition: 0.3s; cursor: pointer; }
+        .box-head { padding: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: 900; font-size: 1.1rem; color: var(--gold); text-transform: uppercase; }
+        .box-body { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.4s ease-out; color: #888; font-size: 1.1rem; }
+        .box.open { border-color: var(--gold); background: #111; }
+        .box.open .box-body { max-height: 500px; padding-bottom: 30px; }
+
+        /* The 3D "Heavy" Button */
+        .btn-wrap { text-align: center; margin: 80px 0; }
+        .pushable { background: #6b5314; border-radius: 0px; border: none; padding: 0; cursor: pointer; text-decoration: none; display: inline-block; }
+        .front { display: block; padding: 25px 60px; border: 2px solid #000; font-size: 1.6rem; color: #000; background: var(--gold); transform: translateY(-10px); transition: transform 0.2s; font-weight: 900; text-transform: uppercase; }
+        .pushable:active .front { transform: translateY(-2px); }
+
+        .price-tag { text-align: center; margin: 40px 0; }
+        .was { text-decoration: line-through; color: #444; font-size: 1.8rem; font-weight: 900; }
+        .now { font-size: 5rem; color: var(--gold); font-weight: 900; display: block; line-height: 1; }
+
+        footer { text-align: center; padding: 100px 20px; border-top: 1px solid #111; color: #333; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+        
+        @media (max-width: 600px) { h1 { font-size: 2.5rem; } .now { font-size: 3.5rem; } .front { padding: 20px 30px; font-size: 1.2rem; } }
     </style>
 </head>
 <body>
 
-<div id="progress-container"><div id="progress-bar"></div></div>
-<div id="timer-box">⚡ DISCOVER YOUR EDEN. ₦15,000 EXPIRES IN: <span id="timer">48:00:00</span></div>
+<div id="progress-bar"></div>
+<div id="timer-box">⏰ YOUR WINDOW TO DOMINATE CLOSES IN: <span id="timer">48:00:00</span></div>
 
 <div class="container">
-    <h1>I was staring at a Red Sea of my own making.</h1>
-    <div class="author-tag">A Personal Note from Joshua Charles E.</div>
-
-    <p><span class="dropcap">N</span>ot long ago, I was exactly where you are. I had the knowledge and the drive, but my reality was a stubborn wall of "almost." I realized I was suffering from <strong>The Moses Problem</strong>—waiting for a miracle while the staff of Domination was already in my hand.</p>
+    <span class="sub-header">THE RETURN TO EDEN</span>
+    <h1>Your "Hustle" Is Failing You.</h1>
     
-    <div class="pull-quote">"Your doubt isn't a feeling. It is a software error."</div>
-
-    <p>When I performed the <strong>Factory Reset</strong>, I stopped being the "Knight" and became the "Director." I found my way back to Eden, where abundance is a biological certainty.</p>
-
-    <div class="testimonial-inline">
-        "I was the 'Owner-Slave' to a business that exhausted me. After Part 3, I realized I was managing a body without an idea. Today, I am the Pilot."
-        <strong>— Sarah A., Digital Entrepreneur</strong>
+    <div class="story-section">
+        <p><span class="dropcap">I</span> used to be just like you. I had the brains, I had the products, and I had the passion. But my bank account was dead silent. I was working 18-hour days on a Vivo Y1, trying to force my way into success.</p>
+        
+        <p>I thought I needed "more information." I thought I needed "more money." I was wrong. I was suffering from <strong>The Moses Problem</strong>—standing right in front of the Red Sea, waiting for a miracle, while the staff of power was already in my hand.</p>
     </div>
 
-    <h2 style="text-align:center; font-family:'Inter',sans-serif; margin-top:60px;">THE 3-PART RADAR</h2>
+    <div class="pull-quote">"Stop looking for more things to learn. You need a Factory Reset."</div>
 
-    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
-        <div class="header-trigger">PART 1: DISPEL THE MYTH <span class="icon">+</span></div>
-        <div class="content-area"><p>We kill the lie that you "need money to make money." Using <strong>The 7 Motion</strong>, we get you in pursuit of your Eden immediately with what you have now.</p></div>
+    <p>I had to unlearn the "Slave" mindset to become the **Director**. I had to shatter the illusion that money is scarce. Once I did, everything moved. That radar is what I'm handing to you today.</p>
+
+    <div class="testimony">
+        <p>"Joshua isn't just selling a book. He's performing brain surgery on your bank account. I went from 0 sales to a consistent flow in 48 hours."</p>
+        <span>— Tunde O., Author</span>
     </div>
 
-    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
-        <div class="header-trigger">PART 2: SHATTER THE ILLUSION <span class="icon">+</span></div>
-        <div class="content-area"><p>The <strong>Factory Reset</strong>. We purge the learned helplessness and install <strong>Sensory Triggers</strong> to make your perceived value undeniable to the market.</p></div>
+    <h2 style="text-align:center; font-weight:900; margin-top:80px;">THE SYSTEM</h2>
+
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">PART 1: DISPEL THE MYTH <span>+</span></div>
+        <div class="box-body">We kill the lie that you need a huge team or millions to start. If you’ve got a smartphone and a brain, you’ve got enough. We get you moving <strong>TODAY</strong>.</div>
     </div>
 
-    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
-        <div class="header-trigger">PART 3: THE RETURN TO EDEN <span class="icon">+</span></div>
-        <div class="content-area"><p>Building the <strong>EQSP Wealth System</strong>. We move you from labor to leverage, building a machine that grows while you sleep.</p></div>
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">PART 2: SHATTER THE ILLUSION <span>+</span></div>
+        <div class="box-body">The "Factory Reset." We delete the learned helplessness and install <strong>Sensory Triggers</strong>. This makes people feel like they are "losing" if they don't buy from you.</div>
     </div>
 
-    <div class="testimonial-inline">
-        "Part 2 alone shifted my sales in a way 6 months of 'hard work' couldn't. I am finally in motion."
-        <strong>— Tunde O., Author</strong>
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">PART 3: THE RETURN TO EDEN <span>+</span></div>
+        <div class="box-body">The **EQSP Wealth System**. We build the machine. You stop working for money and start building leverage. You become the Pilot, not the engine.</div>
     </div>
 
-    <h2 style="text-align:center; font-family:'Inter',sans-serif; margin-top:80px; color:var(--gold);">FREQUENTLY ASKED QUESTIONS</h2>
+    <h2 style="text-align:center; font-weight:900; margin-top:100px; color:var(--gold);">QUESTIONS PEOPLE ASK</h2>
 
-    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
-        <div class="header-trigger">Is this a physical hardcopy book? <span class="icon">+</span></div>
-        <div class="content-area"><p>No. This is a digital **Surgical System**. Dominators need speed. You get instant access to the framework so you can start your reset on your device immediately.</p></div>
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">1. Is this a physical hardcopy book? <span>+</span></div>
+        <div class="box-body">No. This is a digital **Surgical System**. To dominate in 2026, you need speed. You get instant access so you can start your "Factory Reset" now on your phone or laptop. No waiting for bikes, no delays—just action.</div>
     </div>
 
-    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
-        <div class="header-trigger">How is this different from "Self-Help"? <span class="icon">+</span></div>
-        <div class="content-area"><p>Most books give you "inspiration." I give you a **Radar**. We don't just talk; we deploy EQSP and Sensory logic to dismantle your limitations mechanically.</p></div>
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">2. How is this different from "Self-Help"? <span>+</span></div>
+        <div class="box-body">Most books just give you "vibes." I'm giving you a **Radar**. We don't just talk about motivation; we deploy real frameworks like the 7 Motion. If you're tired of "feeling good" while staying broke, this is for you.</div>
     </div>
 
-    <div class="dropdown-box" onclick="this.classList.toggle('active-box')">
-        <div class="header-trigger">Does this work for beginners? <span class="icon">+</span></div>
-        <div class="content-area"><p>Yes. Part 1 is specifically designed for those starting with "nothing." We kill the capital myth and show you how to move from exactly where you are.</p></div>
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">3. Does this only work for Authors? <span>+</span></div>
+        <div class="box-body">No. If you have a service, a product, or a skill and people aren't paying you what you’re worth, you are an **"Owner-Slave."** This system fixes that for any coach, expert, or business owner.</div>
     </div>
 
-    <div class="price-section">
-        <p class="old-price">Worth ₦75,000</p>
-        <span class="new-price">₦15,000</span>
-        <p style="color:var(--gold); font-weight:bold;">A One-Time Investment in Your Dominant Future.</p>
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">4. Can I really start with "what I have"? <span>+</span></div>
+        <div class="box-body">That's the whole point. We kill the myth that you need "capital" to be great. I show you how to use your current resources—even just a smartphone—to get back to Eden.</div>
     </div>
 
-    <div class="cta-container">
-        <a href="https://wa.link/nrafvh" class="pushable"><span class="front">I'M READY FOR THE RESET</span></a>
+    <div class="box" onclick="this.classList.toggle('open')">
+        <div class="box-head">5. How long for results? <span>+</span></div>
+        <div class="box-body">The "Factory Reset" starts the second you decide to stop being a victim. Most people see their decision-making and "Motion" change within 48 hours.</div>
     </div>
 
-    <footer style="background:#0a0a0a;">
-        <p>"You can steer yourself any direction you choose."</p>
-        <p>&copy; 2026 JOSHUA CHARLES E. | SHATTERING LIMITATIONS</p>
+    <div class="price-tag">
+        <span class="was">WAS ₦75,000</span>
+        <span class="now">₦15,000</span>
+        <p style="color:var(--gold); font-weight:bold; margin-top:10px;">If ₦15k is too much to save your life, keep scrolling.</p>
+    </div>
+
+    <div class="btn-wrap">
+        <a href="https://wa.link/nrafvh" class="pushable">
+            <span class="front">I'M READY TO DOMINATE</span>
+        </a>
+    </div>
+
+    <footer>
+        "YOU HAVE BRAINS IN YOUR HEAD. YOU HAVE FEET IN YOUR SHOES."<br><br>
+        &copy; 2026 JOSHUA CHARLES E. | SHATTERING THE ILLUSION
     </footer>
 </div>
 
 <script>
     let time = 48 * 60 * 60; 
-    const timerEl = document.getElementById('timer');
     setInterval(() => {
         let h = Math.floor(time / 3600);
         let m = Math.floor((time % 3600) / 60);
         let s = time % 60;
-        timerEl.innerHTML = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        document.getElementById('timer').innerHTML = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         if (time > 0) time--;
     }, 1000);
 
@@ -142,5 +157,6 @@
         document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
     };
 </script>
+
 </body>
     </html>
