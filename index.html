@@ -6,88 +6,56 @@
     <title>THE RESET | Joshua Charles E.</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #050505; --dark: #0f0f0f; --white: #ffffff; --red: #ff3333; }
+        :root { --gold: #D4AF37; --black: #050505; --dark: #0f0f0f; --white: #ffffff; --red: #ff3333; --glass: rgba(255, 255, 255, 0.03); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--white); margin: 0; padding: 0; line-height: 1.6; letter-spacing: -0.02em; }
         
-        /* Smooth Progress */
-        #progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--gold), #fff); width: 0%; z-index: 2000; transition: width 0.1s ease-out; }
-        
+        #progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--gold), #fff); width: 0%; z-index: 2000; }
         #urgency-bar { background: var(--red); color: white; text-align: center; padding: 12px; font-weight: 900; position: sticky; top: 0; z-index: 1000; font-size: 0.85rem; text-transform: uppercase; }
 
         .hero { padding: 100px 24px 60px; text-align: center; max-width: 850px; margin: auto; }
         .kicker { color: var(--gold); text-transform: uppercase; font-weight: 900; letter-spacing: 6px; font-size: 0.75rem; display: block; margin-bottom: 20px; }
         
-        /* BIG PROMISE HEADLINE */
         h1 { font-size: 4rem; font-weight: 900; line-height: 0.9; margin: 0 0 30px; letter-spacing: -0.05em; text-transform: uppercase; }
-        
-        /* CONVINCING SUBTITLE */
         .subtitle { font-size: 1.4rem; color: #888; max-width: 600px; margin: 0 auto 40px; line-height: 1.4; }
-        .subtitle strong { color: #fff; }
 
         .container { padding: 40px 24px; max-width: 650px; margin: auto; }
-        
         p { margin-bottom: 35px; font-size: 1.3rem; color: #bbb; line-height: 1.7; }
         .dropcap { float: left; font-size: 5.5rem; line-height: 0.7; font-weight: 900; margin-right: 15px; color: var(--gold); margin-top: 10px; }
 
-        .quote-block { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); font-style: italic; border-left: 6px solid var(--gold); padding: 30px; margin: 60px 0; background: var(--dark); border-radius: 0 20px 20px 0; }
+        /* Calling Out Section */
+        .call-out { background: var(--dark); border: 1px solid #222; padding: 40px; border-radius: 24px; margin: 60px 0; }
+        .call-out h3 { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 20px; }
+        .call-out ul { list-style: none; padding: 0; }
+        .call-out li { font-size: 1.1rem; color: #eee; margin-bottom: 15px; display: flex; align-items: flex-start; }
+        .call-out li::before { content: '✓'; color: var(--gold); margin-right: 15px; font-weight: bold; }
 
-        /* The Dopamine Button */
+        /* Testimony Section */
+        .testimony-grid { margin: 60px 0; }
+        .testimony-card { background: var(--glass); border: 1px solid #1a1a1a; padding: 30px; border-radius: 20px; margin-bottom: 20px; position: relative; }
+        .testimony-card p { font-family: 'Playfair Display', serif; font-style: italic; color: #fff; font-size: 1.3rem; margin-bottom: 15px; border: none; }
+        .testimony-card span { color: var(--gold); font-weight: 900; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Dopamine Button */
         .cta-wrap { margin: 40px 0; text-align: center; }
-        .pushable {
-            position: relative;
-            border: none;
-            background: #5c4a12;
-            padding: 0;
-            cursor: pointer;
-            outline-offset: 4px;
-            transition: filter 250ms;
-            border-radius: 12px;
-        }
-        .shadow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            background: rgba(0,0,0,0.5);
-            transform: translateY(4px);
-            transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-        }
-        .front {
-            display: block;
-            position: relative;
-            padding: 22px 45px;
-            border-radius: 12px;
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #000;
-            background: var(--gold);
-            will-change: transform;
-            transform: translateY(-8px);
-            transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-            text-transform: uppercase;
-        }
-        .pushable:hover .front { transform: translateY(-10px); }
+        .pushable { position: relative; border: none; background: #5c4a12; padding: 0; cursor: pointer; border-radius: 12px; }
+        .shadow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px; background: rgba(0,0,0,0.5); transform: translateY(4px); transition: transform 600ms cubic-bezier(.3, .7, .4, 1); }
+        .front { display: block; position: relative; padding: 22px 45px; border-radius: 12px; font-size: 1.3rem; font-weight: 900; color: #000; background: var(--gold); transform: translateY(-8px); transition: transform 600ms cubic-bezier(.3, .7, .4, 1); text-transform: uppercase; }
         .pushable:active .front { transform: translateY(-2px); transition: transform 34ms; }
-        .pushable:active .shadow { transform: translateY(1px); transition: transform 34ms; }
 
-        /* Smooth Accordion */
-        .box { background: var(--dark); border: 1px solid #222; margin-bottom: 16px; border-radius: 16px; overflow: hidden; transition: 0.3s; }
-        .box-head { padding: 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 900; color: var(--gold); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
-        .box-body { padding: 0 24px; max-height: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0, 1, 0, 1); color: #888; font-size: 1.1rem; }
-        .box.open { border-color: #444; background: #151515; }
-        .box.open .box-body { max-height: 1000px; padding-bottom: 24px; transition: all 0.4s cubic-bezier(1, 0, 1, 0); }
+        /* Accordion */
+        .box { background: var(--dark); border: 1px solid #222; margin-bottom: 16px; border-radius: 16px; overflow: hidden; }
+        .box-head { padding: 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 900; color: var(--gold); text-transform: uppercase; font-size: 0.9rem; }
+        .box-body { padding: 0 24px; max-height: 0; overflow: hidden; transition: all 0.4s ease; color: #888; }
+        .box.open .box-body { max-height: 1000px; padding-bottom: 24px; }
 
         .price-hero { text-align: center; margin: 80px 0 20px; }
-        .was { text-decoration: line-through; color: #444; font-size: 1.5rem; font-weight: 900; }
         .now { font-size: 5.5rem; color: #fff; font-weight: 900; display: block; line-height: 1; margin: 10px 0; }
 
-        footer { text-align: center; padding: 100px 24px; border-top: 1px solid #111; color: #444; font-size: 0.7rem; letter-spacing: 3px; font-weight: bold; }
+        footer { text-align: center; padding: 100px 24px; border-top: 1px solid #111; color: #444; font-size: 0.7rem; font-weight: bold; }
         
-        @media (max-width: 600px) { h1 { font-size: 2.8rem; } .now { font-size: 4rem; } .front { padding: 18px 30px; font-size: 1.1rem; } }
+        @media (max-width: 600px) { h1 { font-size: 2.8rem; } .now { font-size: 4rem; } }
     </style>
 </head>
 <body>
@@ -98,7 +66,7 @@
 <div class="hero">
     <span class="kicker">The Final Authority</span>
     <h1>I Will Force Your Brain To Stop Being Broke.</h1>
-    <p class="subtitle">Give me 48 hours and I’ll hand you the <strong>Surgical System</strong> to delete your doubt and return to <strong>Eden</strong>—the place where abundance is a biological guarantee.</p>
+    <p class="subtitle">Give me 48 hours and I’ll hand you the <strong>Surgical System</strong> to delete your doubt and return to <strong>Eden</strong>.</p>
     
     <div class="cta-wrap">
         <button class="pushable" onclick="window.location.href='https://wa.link/nrafvh'">
@@ -109,62 +77,69 @@
 </div>
 
 <div class="container">
-    <p><span class="dropcap">Y</span>our "hustle" is failing you because you are fighting with a broken radar. You’ve been working 18-hour days, pushing and praying, but the bank balance hasn't moved. You feel like an **"Owner-Slave"**—trapped in a business that dies the moment you stop working.</p>
-    
-    <p>I know that feeling. I was there, grinding on a <strong>Vivo Y1</strong>, staring at the Red Sea of my own limitations. I was waiting for a miracle until I realized: **You don't need to know more. You need to reset the software.**</p>
+    <div class="call-out">
+        <h3>IS THIS FOR YOU?</h3>
+        <ul>
+            <li><strong>The "Invisible Genius":</strong> You have great products but zero sales.</li>
+            <li><strong>The "Owner-Slave":</strong> If you stop working for one day, your income dies.</li>
+            <li><strong>The "Stuck High-Ticket Lead":</strong> You know you’re worth more, but you’re charging peanuts.</li>
+            <li><strong>The "Doubt-Prisoner":</strong> You're waiting for "the right time" while others are winning.</li>
+        </ul>
+    </div>
 
-    <div class="quote-block">"Success isn't about working hard. It's about having the right Motion."</div>
+    <p><span class="dropcap">Y</span>our "hustle" is failing you because you are fighting with a broken radar. I was there, grinding on a <strong>Vivo Y1</strong>, waiting for a miracle until I realized: **Success isn't about working hard. It's about a Factory Reset.**</p>
 
-    <p>This is the <strong>Identity Collapse</strong>. We delete the person who is "trying" and install the person who is **Dominating**. I’ve mapped out the exact 3-step radar to get you back to the life you were designed for.</p>
+    <div class="testimony-grid">
+        <div class="testimony-card">
+            <p>"I felt like Joshua was writing my biography. After Part 2, the 'Learned Helplessness' just vanished. I made more in 48 hours than in the last 3 months."</p>
+            <span>— Tunde O., Author & Consultant</span>
+        </div>
+    </div>
 
-    <h2 style="text-align:center; font-weight:900; margin: 80px 0 40px; letter-spacing: -1px;">THE RADAR SYSTEM</h2>
+    <h2 style="text-align:center; font-weight:900; margin: 80px 0 40px;">THE RADAR SYSTEM</h2>
 
     <div class="box" onclick="this.classList.toggle('open')">
         <div class="box-head">PHASE 1: DISPEL THE MYTH <span>+</span></div>
-        <div class="box-body">We kill the lie that you need capital or a team to start. I show you how to use exactly what you have in your hand right now to trigger <strong>The 7 Motion</strong>. No more waiting.</div>
+        <div class="box-body"><p>We kill the lie that you need capital or a team. I show you how to use exactly what you have now to trigger <strong>The 7 Motion</strong>.</p></div>
     </div>
 
     <div class="box" onclick="this.classList.toggle('open')">
         <div class="box-head">PHASE 2: SHATTER THE ILLUSION <span>+</span></div>
-        <div class="box-body">This is the <strong>Factory Reset</strong>. We delete the "Learned Helplessness" and install <strong>Sensory Triggers</strong>. You will learn how to make your value so loud that the market cannot ignore you.</div>
+        <div class="box-body"><p>The <strong>Factory Reset</strong>. We install <strong>Sensory Triggers</strong> so the market can't ignore you.</p></div>
     </div>
 
     <div class="box" onclick="this.classList.toggle('open')">
         <div class="box-head">PHASE 3: THE RETURN TO EDEN <span>+</span></div>
-        <div class="box-body">Building the <strong>EQSP Wealth System</strong>. You move from labor to leverage. You build a machine that works while you sleep, making you the Director of your own abundance.</div>
+        <div class="box-body"><p>The <strong>EQSP Wealth System</strong>. You move from labor to leverage and build a machine that works while you sleep.</p></div>
+    </div>
+
+    <div class="testimony-grid">
+        <div class="testimony-card">
+            <p>"This isn't a book; it's brain surgery. I stopped being the 'Knight' begging for sales and became the Director. Abundance is now my reality."</p>
+            <span>— Sarah A., Digital Entrepreneur</span>
+        </div>
     </div>
 
     <h2 style="text-align:center; font-weight:900; margin: 100px 0 40px; color: var(--gold);">THE VETTING (FAQ)</h2>
 
     <div class="box" onclick="this.classList.toggle('open')">
         <div class="box-head">1. Is this a physical hardcopy book? <span>+</span></div>
-        <div class="box-body">No. This is a digital **Surgical System**. Dominators need speed. You get instant access so you can begin your reset immediately on your phone or laptop. No delays—just motion.</div>
+        <div class="box-body"><p>No. This is a digital **Surgical System**. You get instant access on your phone or laptop. No delays—just motion.</p></div>
     </div>
 
     <div class="box" onclick="this.classList.toggle('open')">
-        <div class="box-head">2. I’ve read self-help books. How is this different? <span>+</span></div>
-        <div class="box-body">Books give you info; I give you a **Radar**. We don't just talk about motivation; we deploy EQSP and the 7 Motion to dismantle your mental software. If you're tired of "vibes" but no money, this is for you.</div>
+        <div class="box-head">2. How is this different from "Self-Help"? <span>+</span></div>
+        <div class="box-body"><p>Books give info; I give you a **Radar**. We deploy the 7 Motion to dismantle your mental software mechanically.</p></div>
     </div>
 
     <div class="box" onclick="this.classList.toggle('open')">
-        <div class="box-head">3. Does this only work for authors? <span>+</span></div>
-        <div class="box-body">No. If you have a skill, a product, or a service and the market isn't paying you what you’re worth, you are an **"Owner-Slave."** This system works for any coach, expert, or entrepreneur.</div>
-    </div>
-
-    <div class="box" onclick="this.classList.toggle('open')">
-        <div class="box-head">4. Can I start with "what I have" now? <span>+</span></div>
-        <div class="box-body">Yes. That is the core of the system. We show you how to use your current resources—even just a smartphone—to build your return to Eden.</div>
-    </div>
-
-    <div class="box" onclick="this.classList.toggle('open')">
-        <div class="box-head">5. How long for results? <span>+</span></div>
-        <div class="box-body">The reset happens the second you decide to stop being a victim. Most users report a radical shift in their decision-making and cash-flow within 48 hours.</div>
+        <div class="box-head">3. Can I start with "what I have" now? <span>+</span></div>
+        <div class="box-body"><p>Yes. That's the whole point. We show you how to use your current resources to get back to Eden.</p></div>
     </div>
 
     <div class="price-hero">
         <span class="was">VALUE: ₦75,000</span>
         <span class="now">₦15,000</span>
-        <p style="color:var(--gold); font-weight:bold; margin-top:15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;">Your Eden is one click away.</p>
     </div>
 
     <div class="cta-wrap">
@@ -175,13 +150,11 @@
     </div>
 
     <footer>
-        "YOU HAVE BRAINS IN YOUR HEAD. YOU HAVE FEET IN YOUR SHOES."<br>
         &copy; 2026 JOSHUA CHARLES E. | THE IDENTITY COLLAPSE
     </footer>
 </div>
 
 <script>
-    // 48-hour Timer
     let time = 48 * 60 * 60; 
     setInterval(() => {
         let h = Math.floor(time / 3600);
@@ -191,13 +164,11 @@
         if (time > 0) time--;
     }, 1000);
 
-    // iPhone-style Progress Bar
     window.onscroll = function() {
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         document.getElementById("progress").style.width = (winScroll / height) * 100 + "%";
     };
 </script>
-
 </body>
-        </html>
+                                                                                                                                                             </html>
